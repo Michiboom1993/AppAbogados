@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AppAbogados</string>
+
+    <string-array name="categoria">
+        <item>Derecho penal</item>
+        <item>Derecho procesal</item>
+        <item>Derecho inmoviliario</item>
+        <item>Derecho civil</item>
+        <item>Derecho laboral</item>
+        <item>Derecho de familia</item>
+        <item>Derecho mercantil</item>
+
+
+
+
+    </string-array>
+</resources>

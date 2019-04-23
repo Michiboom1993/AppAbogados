@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="107dp"
+        android:text="Expon tu problema con todo detalle"
+        android:textColor="@color/black"
+        android:textSize="24dp"/>
+
+    <EditText
+        android:id="@+id/problema"
+        android:layout_width="337dp"
+        android:layout_height="158dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="168dp"
+        android:background="@drawable/borderecto" />
+
+    <Button
+        android:id="@+id/enviar"
+        android:layout_width="109dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="290dp"
+        android:background="@drawable/borderedondo"
+        android:text="Enviar" />
+
+</RelativeLayout>

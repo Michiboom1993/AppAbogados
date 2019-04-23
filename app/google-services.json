@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "830168368768",
+    "firebase_url": "https://appabogados-fc129.firebaseio.com",
+    "project_id": "appabogados-fc129",
+    "storage_bucket": "appabogados-fc129.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830168368768:android:0ccd8f2f8bba64df",
+        "android_client_info": {
+          "package_name": "com.example.marki.appabogados"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830168368768-nqfjt1d6284477alpnudmb7bld1oiad9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.marki.appabogados",
+            "certificate_hash": "c7a4175e88dc7bb03b2d2593331d5e7b1ee61cad"
+          }
+        },
+        {
+          "client_id": "830168368768-rtkg6ooqhrclfpq2vhmrbh305t7iij95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSeyTkclvelbD16PgHd5QV4coKtyPXMcc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830168368768-rtkg6ooqhrclfpq2vhmrbh305t7iij95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

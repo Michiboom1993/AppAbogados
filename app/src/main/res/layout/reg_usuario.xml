@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-135dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/texted"
+        android:background="@drawable/im2" />
+
+    <TextView
+            android:id="@+id/textcorreo"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="82dp"
+            android:text="Correo electronico:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textcontra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textcorreo"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="14dp"
+            android:text="Contraseña:"
+            android:textColor="@android:color/background_dark"
+            android:textColorLink="@android:color/background_dark"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="158dp"
+            android:layout_marginBottom="305dp"
+            android:background="@drawable/borderedondo"
+            android:text="Registrar"
+            android:textColor="@android:color/background_dark" />
+
+        <EditText
+            android:id="@+id/correo"
+            android:layout_width="224dp"
+            android:layout_height="33dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="66dp"
+            android:layout_toEndOf="@+id/textcorreo"
+            android:background="@drawable/borderecto"
+            android:ems="10"
+            android:inputType="textPersonName"
+
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/contraseña"
+            android:layout_width="222dp"
+            android:layout_height="34dp"
+            android:layout_alignTop="@+id/textcontra"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="-14dp"
+            android:layout_toEndOf="@+id/textcorreo"
+            android:background="@drawable/borderecto"
+            android:ems="10"
+            android:hint="string_password"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textnomb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="170dp"
+            android:text="Nombre:"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <EditText
+            android:id="@+id/nombre"
+            android:layout_width="227dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="153dp"
+            android:layout_marginTop="160dp"
+            android:background="@drawable/borderecto"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/texted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="220dp"
+            android:text="Edad:"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="260dp"
+            android:text="Telefono:"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <EditText
+            android:id="@+id/edad"
+            android:layout_width="227dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="153dp"
+            android:layout_marginTop="205dp"
+            android:background="@drawable/borderecto"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/telefono"
+            android:layout_width="224dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="153dp"
+            android:layout_marginTop="250dp"
+            android:background="@drawable/borderecto"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+</RelativeLayout>
