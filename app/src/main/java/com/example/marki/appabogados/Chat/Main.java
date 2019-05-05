@@ -3,6 +3,8 @@ package com.example.marki.appabogados.Chat;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,20 +16,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.marki.appabogados.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class Main extends AppCompatActivity {
 
     private CircleImageView fotoPerfil;
     private TextView nombre;
@@ -44,11 +50,19 @@ public class MainActivity extends AppCompatActivity {
     private static final int PHOTO_SEND = 1;
     private static final int PHOTO_PERFIL = 2;
     private String fotoPerfilCadena;
+    public String nombre1;
+    public String nombre2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.chat_1);//////////**************************/////////////
+
+        Bundle bundle = new Bundle(getIntent().getExtras());
+        nombre1=bundle.getString("nombre1");
+        nombre2=bundle.getString("nombre2");
+        //obtenerNombre();
 
         fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
         nombre = (TextView) findViewById(R.id.nombre);
@@ -62,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = database.getReference("chat");//Sala de chat (nombre)
         storage = FirebaseStorage.getInstance();
 
+
         adapter = new AdapterMensajes(this);
         LinearLayoutManager l = new LinearLayoutManager(this);
         rvMensajes.setLayoutManager(l);
@@ -70,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),nombre.getText().toString(),fotoPerfilCadena,"1", ServerValue.TIMESTAMP));
+                databaseReference.child(nombre1+"-"+nombre2).push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),nombre1,fotoPerfilCadena,"1", ServerValue.TIMESTAMP));
+              //  databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),nombre1,fotoPerfilCadena,"1", ServerValue.TIMESTAMP));
                 txtMensaje.setText("");
             }
         });
@@ -103,11 +119,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        /*databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getKey().equals(nombre1+"-"+nombre2)) {
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                        MensajeRecibir m = dataSnapshot1.getValue(MensajeRecibir.class);
+                        adapter.addMensaje(m);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+        DatabaseReference databaseReference1=database.getReference().child("chat/"+nombre1+"-"+nombre2);
+
+        databaseReference1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+              //  for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                    MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
+                    adapter.addMensaje(m);
+               // }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
-                adapter.addMensaje(m);
+                if(dataSnapshot.getKey().equals(nombre1+"-"+nombre2)) {
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                        MensajeRecibir m = dataSnapshot1.getValue(MensajeRecibir.class);
+                        adapter.addMensaje(m);
+                    }
+                }
             }
 
             @Override
@@ -129,15 +197,37 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
     }
+
+    /*private void obtenerNombre(){
+
+        FirebaseAuth mAuth;
+        mAuth= FirebaseAuth.getInstance();
+        FirebaseUser currentUser=mAuth.getCurrentUser();
+        FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1 = database1.getReference("Miembros/"+currentUser.getUid());//Sala de chat (nombre)
+
+        databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               nombre1= dataSnapshot.child("nombre").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }*/
 
     private void setScrollbar(){
         rvMensajes.scrollToPosition(adapter.getItemCount()-1);
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PHOTO_SEND && resultCode == RESULT_OK){
@@ -163,9 +253,9 @@ public class MainActivity extends AppCompatActivity {
                     fotoPerfilCadena = u.toString();
                     MensajeEnviar m = new MensajeEnviar("Kevin ha actualizado su foto de perfil",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
-                    Glide.with(MainActivity.this).load(u.toString()).into(fotoPerfil);
+                    Glide.with(Main.this).load(u.toString()).into(fotoPerfil);
                 }
             });
         }
-    }
+    }*/
 }

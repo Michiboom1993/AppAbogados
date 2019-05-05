@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 
+import com.example.marki.appabogados.Chat.Main;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +47,7 @@ public class IniciarSesionUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sesion_usuario);
 
+        Button chat = findViewById(R.id.chat);
         Button contactar=findViewById(R.id.contactar);
         Button llamar= findViewById(R.id.llamar);
         Button buscar= findViewById(R.id.buscador);
@@ -55,6 +57,7 @@ public class IniciarSesionUsuario extends AppCompatActivity {
         LinearLayoutManager l = new LinearLayoutManager(this);
         rvAbogados.setLayoutManager(l);
         rvAbogados.setAdapter(adapter);
+
 
 
         mAuth=FirebaseAuth.getInstance();
@@ -145,6 +148,7 @@ public class IniciarSesionUsuario extends AppCompatActivity {
 
                         Intent intent= new Intent(IniciarSesionUsuario.this, Contactar.class);
                         Bundle bundle=new Bundle();
+
                         bundle.putString("nombre",nombre);
                         bundle.putString("telf",telefono);
                         bundle.putString("nombreAbogado",nombreAbogado);
@@ -191,6 +195,30 @@ public class IniciarSesionUsuario extends AppCompatActivity {
                 });
 
 
+
+            }
+        });
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        nombre= dataSnapshot.child("nombre").getValue().toString();
+                        Bundle bundle= new Bundle();
+                        bundle.putString("nombre2",nombreAbogado);
+                        bundle.putString("nombre1",nombre);
+                        Intent intent12= new Intent(IniciarSesionUsuario.this, Main.class);
+                        intent12.putExtras(bundle);
+                        startActivity(intent12);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });

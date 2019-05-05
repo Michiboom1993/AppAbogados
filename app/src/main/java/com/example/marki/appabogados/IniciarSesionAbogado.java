@@ -1,6 +1,8 @@
 package com.example.marki.appabogados;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.marki.appabogados.Chat.Main;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,9 +30,14 @@ public class IniciarSesionAbogado extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public String usuario, incidencia, telefono;
     public String [] lista= new String [100];
+    Bundle bundle= new Bundle();
+    public String nombre1;
+    public String nombre2;
+
 
     public String [][] lista1= new String[100][3];
     public ListView list;
+
 
 
 
@@ -94,12 +103,44 @@ public class IniciarSesionAbogado extends AppCompatActivity {
                finish();
            }
        });
-      
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    Problema problema1 =dataSnapshot.getValue(Problema.class);
+                    nombre2=problema1.getUsuario();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                nombre1=dataSnapshot.child("nombre").getValue(String.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        /***********************************************************/
+
+        Intent intent= new Intent(IniciarSesionAbogado.this, Main.class);
+        bundle.putString("nombre1",nombre2);
+        bundle.putString("nombre2",nombre1);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 });
             comprobar.setOnClickListener(new View.OnClickListener() {        //listener del boton comprobar
