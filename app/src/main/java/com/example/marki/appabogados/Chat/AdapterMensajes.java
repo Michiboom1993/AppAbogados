@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
+public class  AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
 
     private List<MensajeRecibir> listMensaje = new ArrayList<>();
     private Context c;
