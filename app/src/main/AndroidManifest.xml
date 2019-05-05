@@ -21,6 +21,7 @@
         <activity android:name=".IniciarSesionAbogado"/>
         <activity android:name=".IniciarSesionUsuario"/>
         <activity android:name=".Contactar"/>
+        <activity android:name=".Chat.Main"/>
     </application>
 
 </manifest>

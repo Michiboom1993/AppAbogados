@@ -5,6 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.marki.appabogados.R;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HolderMensaje extends RecyclerView.ViewHolder {
@@ -12,16 +15,16 @@ public class HolderMensaje extends RecyclerView.ViewHolder {
     private TextView nombre;
     private TextView mensaje;
     private TextView hora;
-    private CircleImageView fotoVerga88;
-    private ImageView fotoMensaje3;
+    private CircleImageView fotoMensajePerfil;
+    private ImageView fotoMensaje;
 
     public HolderMensaje(View itemView) {
         super(itemView);
         nombre = (TextView) itemView.findViewById(R.id.nombreMensaje);
         mensaje = (TextView) itemView.findViewById(R.id.mensajeMensaje);
         hora = (TextView) itemView.findViewById(R.id.horaMensaje);
-        fotoVerga88 = (CircleImageView) itemView.findViewById(R.id.fotoPerfilMensaje);
-        fotoMensaje3 = (ImageView) itemView.findViewById(R.id.mensajeFoto);
+        fotoMensajePerfil = (CircleImageView) itemView.findViewById(R.id.fotoPerfilMensaje);
+        fotoMensaje = (ImageView) itemView.findViewById(R.id.mensajeFoto);
     }
 
     public TextView getNombre() {
