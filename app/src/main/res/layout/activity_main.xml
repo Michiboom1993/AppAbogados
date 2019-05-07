@@ -92,12 +92,12 @@
 
     <Button
         android:id="@+id/regabogado"
-        android:layout_width="wrap_content"
+        android:layout_width="157dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/regusuario"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="124dp"
         android:background="@drawable/borderedondo"
         android:text="Registrar abogado" />
 
@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/regusuario"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-4dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="416dp"
         android:background="@drawable/borderedondo"
         android:text="Iniciar sesion" />
