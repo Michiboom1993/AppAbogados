@@ -58,21 +58,16 @@ public class IniciarSesionUsuario extends AppCompatActivity {
         rvAbogados.setLayoutManager(l);
         rvAbogados.setAdapter(adapter);
 
-
-
         mAuth=FirebaseAuth.getInstance();
         FirebaseUser currentUser=mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
 
-
-
-
        final DatabaseReference reference=database.getReference("Miembros");
-       final DatabaseReference reference2=database.getReference("Miembros/"+currentUser.getUid());      //buscamos ambas referencias tanto la del usuario que esta identificado, como la normal
+       final DatabaseReference reference2=database.getReference("Miembros/"+currentUser.getUid());
 
        cerrarSesion.setOnClickListener(new View.OnClickListener() {
            @Override
-           public void onClick(View v) {            //Boton que permite cerrar sesion
+           public void onClick(View v) {
                FirebaseAuth.getInstance().signOut();
                finish();
            }
@@ -81,20 +76,13 @@ public class IniciarSesionUsuario extends AppCompatActivity {
         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Query q=reference.orderByChild("rol").equalTo("abogado");           //Para buscar utilizaremos una query donde se comprueba si el rol coincide con abogado
-                                                                                    //de esta forma podemos mostrar en nuestro recyclerlayout los abogados que se han encontrado
+                Query q=reference.orderByChild("rol").equalTo("abogado");
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
                         int cont = 0;
                         nombres = new String[(int) (dataSnapshot.getChildrenCount())];
                         String nombre4, rol4, email4,categoria4,contraseña4, edad4, telefono4,experiencia4;
-                        //for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
-
                            for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
                                 nombre4 =String.valueOf(dataSnapshot1.child("nombre").getValue(String.class));
                                 rol4 =String.valueOf(dataSnapshot1.child("rol").getValue(String.class));
@@ -104,36 +92,21 @@ public class IniciarSesionUsuario extends AppCompatActivity {
                                 edad4 =String.valueOf(dataSnapshot1.child("edad").getValue(Integer.class));
                                 telefono4 =String.valueOf(dataSnapshot1.child("telefono").getValue(Integer.class));
                                 experiencia4 =String.valueOf(dataSnapshot1.child("experiencia").getValue(Integer.class));
-
                                Abogado b= new Abogado(rol4,nombre4,email4,categoria4,contraseña4,Integer.valueOf(edad4),Integer.valueOf(telefono4),Integer.valueOf(experiencia4));
                                nombres[cont]=nombre4;
                                adapter.addAbogado(b);
-                               //cont++;
-                         //  }
-                            //Abogado a = datasnapshot.getValue(Abogado.class);
-                            //nombres[cont] = "" + a.getNombre();
-                            //adapter.addAbogado(a);
-
-                            cont++;
+                               cont++;
 
                             if (cont == (int) dataSnapshot.getChildrenCount()) {
                                 InicializarSpinner();
-
                             }
-
                         }
-
                     }
-
-
-
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
-
             }
         });
         contactar.setOnClickListener(new View.OnClickListener() {                   //utilizamos la referencia del usuario identificado para leer y mandar los datos del usuario,
@@ -170,27 +143,20 @@ public class IniciarSesionUsuario extends AppCompatActivity {
         llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Query q=reference.orderByChild("nombre").equalTo(nombreAbogado);            //Lanzamos una query donde el nombre del spinner seleccionado coincida con alguna de los nombres y leemos su numero de telefono
+                Query q=reference.orderByChild("nombre").equalTo(nombreAbogado);
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int cont=0;
-
                         for (DataSnapshot datasnapshot:dataSnapshot.getChildren()){
                             cont++;
-
                             Abogado a = datasnapshot.getValue(Abogado.class);
                             telefono=String.valueOf(a.getTelefono());
-
-
                         }
                         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+telefono)));
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 });
 

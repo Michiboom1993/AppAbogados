@@ -52,10 +52,7 @@ public class RegUsuario extends AppCompatActivity {
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final String correo1=correo.getText().toString();
-
-
                 if (isValidEmail(correo1)){
                     final String contraseña1=contraseña.getText().toString();
                     mAuth.createUserWithEmailAndPassword(correo1, contraseña1)      //Contraseña entre 6 y 8 caracteres y correo tiene que ser valido
@@ -63,30 +60,22 @@ public class RegUsuario extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
                                         Toast.makeText(getApplicationContext(),"Registrando...", Toast.LENGTH_SHORT).show();
                                         Usuario usuario =new Usuario("usuario",correo.getText().toString(),nombre.getText().toString(),contraseña.getText().toString(),Integer.parseInt(telefono.getText().toString()),Integer.parseInt(edad.getText().toString()));
-
                                     // Se crea el objeto usuario y se añade a la base de datos, teniendo como padre su id y a su vez como padre Miembros
-
                                         FirebaseUser currentUser=mAuth.getCurrentUser();
                                         DatabaseReference reference=database.getReference("Miembros/"+currentUser.getUid());
-
                                        reference.setValue(usuario);
-
-
                                        startActivity(intent);
                                     } else {
-                                        // If sign in fails, display a message to the user.
+
                                         Toast.makeText(getApplicationContext(),"error al registrarse", Toast.LENGTH_SHORT).show();
                                     }
-
                                 }
                             });
-
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"Validaciones funcionando", Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(getApplicationContext(), "Validaciones funcionando", Toast.LENGTH_SHORT).show();
                 }
 
 

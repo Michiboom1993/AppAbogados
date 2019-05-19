@@ -57,7 +57,7 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_1);//////////**************************/////////////
+        setContentView(R.layout.chat_1);
 
         Bundle bundle = new Bundle(getIntent().getExtras());
         nombre1=bundle.getString("nombre1");
@@ -73,7 +73,7 @@ public class Main extends AppCompatActivity {
         fotoPerfilCadena = "";
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("chat");//Sala de chat (nombre)
+        databaseReference = database.getReference("chat");
         storage = FirebaseStorage.getInstance();
 
 
@@ -140,10 +140,10 @@ public class Main extends AppCompatActivity {
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-              //  for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+
                     MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
                     adapter.addMensaje(m);
-               // }
+
             }
 
             @Override

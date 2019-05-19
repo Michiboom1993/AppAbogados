@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText correo= findViewById(R.id.textcorreo);
         final EditText contraseña=findViewById(R.id.contrasena);
-
-
         Button btnini = findViewById(R.id.iniciar);
         Button btnregu= findViewById(R.id.regusuario);
         Button btnrega= findViewById(R.id.regabogado);
@@ -52,22 +50,17 @@ public class MainActivity extends AppCompatActivity {
         final Intent intent3= new Intent();
         mAuth=FirebaseAuth.getInstance();
 
-
-
-
         btnini.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email= correo.getText().toString();
                 if(isValidEmail(email)){
                     String password= contraseña.getText().toString();
-                    mAuth.signInWithEmailAndPassword(email, password)                   //metodo que nos ofrece firebase database para la autentificacion, el correo y  la contraseña han de ser validos
+                    mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-
 
                                         FirebaseUser currentUser=mAuth.getCurrentUser();
                                         DatabaseReference reference=database.getReference("Miembros/"+currentUser.getUid());
@@ -75,14 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
                                         reference.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {          //En caso de iniciar sesion correctamente, debemos saber si se ha registrado un usuario o un abogado, y realizamos la comparación
-                                                                                                                        //El siguiente codigo es valido gracias a la structura json
-
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 Usuario usuario=new Usuario();
-
                                                usuario=dataSnapshot.getValue(Usuario.class);
-
-
                                                 if(usuario.getRol().equalsIgnoreCase("abogado")){
                                                     startActivity(new Intent(MainActivity.this, IniciarSesionAbogado.class));
                                                 }
@@ -90,38 +78,28 @@ public class MainActivity extends AppCompatActivity {
                                                     startActivity(new Intent(MainActivity.this, IniciarSesionUsuario.class));
                                                 }
                                             }
-
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                                             }
                                         });
-
-
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Toast.makeText(getApplicationContext(), "no se ha logueado", Toast.LENGTH_SHORT).show();
                                     }
-
                                 }
                             });
-
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Introduzca bien los campos",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
         btnregu.setOnClickListener(new View.OnClickListener() {     //boton que manda a la actividad de registro de usuario
             @Override
             public void onClick(View view) {
                 startActivity(intent1);
             }
         });
-
-
         btnrega.setOnClickListener(new View.OnClickListener() {     //boton que manda a la actividad de registro de abogado
             @Override
             public void onClick(View v) {

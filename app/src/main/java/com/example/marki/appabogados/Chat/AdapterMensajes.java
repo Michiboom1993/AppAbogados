@@ -18,22 +18,18 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
 
     private List<MensajeRecibir> listMensaje = new ArrayList<>();
     private Context c;
-
     public AdapterMensajes(Context c) {
         this.c = c;
     }
-
     public void addMensaje(MensajeRecibir m){
         listMensaje.add(m);
         notifyItemInserted(listMensaje.size());
     }
-
     @Override
     public HolderMensaje onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(c).inflate(R.layout.chat_2,parent,false);
         return new HolderMensaje(v);
     }
-
     @Override
     public void onBindViewHolder(HolderMensaje holder, int position) {
         holder.getNombre().setText(listMensaje.get(position).getNombre());

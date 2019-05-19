@@ -55,13 +55,10 @@ public class RegAbogado extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 categoria=parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,24 +75,17 @@ public class RegAbogado extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                        // Toast.makeText(getApplicationContext(),"Master!!!!", Toast.LENGTH_SHORT).show();
                                         Abogado abogado =new Abogado("abogado",nombre.getText().toString(),correo.getText().toString(),categoria,contraseña.getText().toString(),Integer.parseInt(edad.getText().toString()),Integer.parseInt(telefono.getText().toString()),Integer.parseInt(experiencia.getText().toString()));
-
-
-
                                         FirebaseUser currentUser=mAuth.getCurrentUser();
                                         DatabaseReference reference=database.getReference("Miembros/"+currentUser.getUid());
                                         reference.setValue(abogado);
-
                                         Toast.makeText(getApplicationContext(),"Te has registrado correctamente",Toast.LENGTH_LONG ).show();
                                         startActivity(intent);
-
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Toast.makeText(getApplicationContext(),"error al registrarse", Toast.LENGTH_SHORT).show();
                                     }
-
                                 }
                             });
-
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Validaciones funcionando", Toast.LENGTH_SHORT).show();
